@@ -1,4 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+echo "====== P r e t t i e r ======"
+
 npm run prettier
+
+echo "====== P r e t t i e r ======"
