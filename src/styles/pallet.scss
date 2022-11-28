@@ -1,0 +1,17 @@
+// ============== Backgrounds ==============
+$background-navigate-light: #e5eff9;
+// ============== Backgrounds ==============
+
+// ============== Colors ==============
+$color-tbc-blue-light: #00a9e8;
+// ============== Colors ==============
+
+:root {
+  // ============== Backgrounds ==============
+  --background-navigate-light: #{$background-navigate-light};
+  // ============== Backgrounds ==============
+
+  // ============== Colors ==============
+  --color-tbc-blue-light: #{$color-tbc-blue-light};
+  // ============== Colors ==============
+}

@@ -1,0 +1,18 @@
+.navigation-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--background-navigate-light);
+  li {
+    cursor: pointer;
+    fa-icon {
+      font-size: 25px;
+      color: var(--color-tbc-blue-light);
+    }
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+}

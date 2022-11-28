@@ -1,0 +1,13 @@
+<ul class="navigation-wrapper">
+  <li
+    *ngFor="let nav of navigationBar"
+    [routerLink]="nav.routerLink"
+    [tooltip]="{
+      text: nav.label,
+      position: 'top',
+      backgroundColor: 'var(--color-tbc-blue-light)'
+    }"
+  >
+    <fa-icon [icon]="nav.icon"></fa-icon>
+  </li>
+</ul>

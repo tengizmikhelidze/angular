@@ -1,0 +1,11 @@
+<div
+  class="tooltip"
+  [ngClass]="tooltip.position"
+  [style]="'--background:' + tooltip.backgroundColor"
+  [style.color]="tooltip.color"
+  [style.background-color]="tooltip.backgroundColor"
+  [style.left]="tooltip.left + 'px'"
+  [style.top]="tooltip.top + 'px'"
+>
+  {{ tooltip.text }}
+</div>
