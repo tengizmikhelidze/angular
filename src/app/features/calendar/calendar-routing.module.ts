@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CalendarComponent } from './component/calendar.component';
 
 const routes: Routes = [
   {
-    path: 'calendar',
-    loadChildren: () =>
-      import('./calendar/calendar.module').then((m) => m.CalendarModule),
+    path: '',
+    component: CalendarComponent,
   },
 ];
 
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class FeaturesRoutingModule {}
+export class CalendarRoutingModule {}
