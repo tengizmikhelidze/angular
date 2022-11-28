@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   standalone: true,
-  template: `<main>
+  template: ` <main [routerLink]="'/app'">
     <div>
       <h1>YOU SHALL NOT PASS!</h1>
       <br />
       <h3>Error 404, Page Not Found!</h3>
+      <br />
+      <h3>Click Image To Return Home Page</h3>
       <br />
       <img
         src="./assets/images/page-not-found/nf-404.png"
@@ -31,16 +34,19 @@ import { Component } from '@angular/core';
           rgba(254, 254, 254, 1) 100%
         );
       }
+
       div {
         text-align: center;
         pointer-events: none;
         user-select: none;
       }
+
       img {
         width: 100%;
         height: auto;
       }
     `,
   ],
+  imports: [RouterLink],
 })
 export class PageNotFoundComponent {}

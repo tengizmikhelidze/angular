@@ -9,6 +9,11 @@ const routes: Routes = [
       import('../features/features.module').then((m) => m.FeaturesModule),
   },
   {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'app',
+  },
+  {
     path: '**',
     pathMatch: 'full',
     component: PageNotFoundComponent,
