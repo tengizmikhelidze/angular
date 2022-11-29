@@ -1,5 +1,42 @@
 <div class="body-wrapper">
-  <div>
-    <div></div>
-  </div>
+  <form [formGroup]="form">
+    <div class="input-wrapper">
+      <div
+        class="date-wrapper first-date-wrapper"
+        [formGroupName]="'firstDate'"
+      >
+        <input class="date-input day" [formControlName]="'day'" />/
+        <input class="date-input month" [formControlName]="'month'" />/
+        <input class="date-input year" [formControlName]="'year'" />
+      </div>
+      &nbsp; - &nbsp;
+      <div
+        class="date-wrapper second-date-wrapper"
+        [formGroupName]="'secondDate'"
+      >
+        <input class="date-input day" [formControlName]="'day'" />/
+        <input class="date-input month" [formControlName]="'month'" />/
+        <input class="date-input year" [formControlName]="'year'" />
+      </div>
+    </div>
+    <div class="calendar-wrapper">
+      <div class="calendar calendar-start">
+        <table>
+          <thead>
+            <tr>
+              <th>ორშ</th>
+              <th>სამ</th>
+              <th>ოთხ</th>
+              <th>ხუთ</th>
+              <th>პარ</th>
+              <th>შაბ</th>
+              <th>კვი</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="calendar calendar-end"></div>
+    </div>
+  </form>
 </div>

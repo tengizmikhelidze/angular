@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { CalendarRoutingModule } from './calendar-routing.module';
 import { CalendarComponent } from './component/calendar.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [CalendarComponent],
-  imports: [CommonModule, CalendarRoutingModule],
+  imports: [CommonModule, CalendarRoutingModule, ReactiveFormsModule],
 })
 export class CalendarModule {}
