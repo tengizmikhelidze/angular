@@ -1,35 +1,157 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
 .body-wrapper {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: "Open Sans", sans-serif;
 
   form {
     position: relative;
+
     .input-wrapper {
       display: flex;
+
       .date-wrapper {
         color: var(--color-tbc-blue-light);
+
         .date-input {
           width: 13px;
           font-size: 12px;
           border: none;
           border-bottom: 1px solid var(--color-tbc-blue-light);
           text-align: center;
+
           &.year {
             width: 27px;
           }
         }
       }
     }
+  }
 
-    .calendar-wrapper {
-      position: absolute;
-      top: 22px;
-      height: 200px;
-      width: 420px;
-      border: 1px solid black;
+  .calendar-wrapper {
+    background: #ffffff;
+    border: 1px solid #c8c8c8;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    position: absolute;
+    top: 22px;
+    height: auto;
+    width: 450px;
+  }
+}
+
+.calendar-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 10px;
+
+  &.label {
+    .calendar {
+      padding: 10px 10px 0;
+    }
+
+    .calendar-start,
+    .calendar-end {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .date-button {
+      background: none;
+      border: none;
+    }
+
+    .arrow {
+      color: #a6a6a6;
+      font-size: 12px;
+      cursor: pointer;
+      width: 25px;
+      height: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:hover {
+        color: var(--color-tbc-blue-light);
+      }
     }
   }
+
+  &.value {
+    .calendar {
+      padding: 10px;
+    }
+
+    table {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      grid-row-gap: 10px;
+
+      thead {
+        tr {
+          display: grid;
+          grid-template-columns: repeat(7, 1fr);
+
+          th {
+            font-weight: 700;
+          }
+        }
+      }
+
+      tbody {
+        display: grid;
+        grid-auto-flow: row;
+        grid-row-gap: 10px;
+
+        tr {
+          display: grid;
+          grid-template-columns: repeat(7, 1fr);
+
+          td {
+            height: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border-radius: 3px;
+            color: #333;
+            transition: box-shadow 0.2s;
+
+            &:hover {
+              background: var(--color-tbc-blue-light);
+            }
+          }
+        }
+      }
+    }
+
+    .calendar-clock {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+      .clock {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        fa-icon {
+          cursor: pointer;
+          color: #a6a6a6;
+          &:hover {
+            color: var(--color-tbc-blue-light);
+          }
+        }
+      }
+    }
+  }
+}
+
+.currentDate {
+  background: var(--background-navigate-light);
 }

@@ -1,6 +1,9 @@
 <div class="body-wrapper">
   <form [formGroup]="form">
-    <div class="input-wrapper">
+    <div
+      class="input-wrapper"
+      (click)="displayCalendarPopup ? hideCalendarPopup() : showCalendarPopup()"
+    >
       <div
         class="date-wrapper first-date-wrapper"
         [formGroupName]="'firstDate'"
@@ -19,24 +22,129 @@
         <input class="date-input year" [formControlName]="'year'" />
       </div>
     </div>
-    <div class="calendar-wrapper">
-      <div class="calendar calendar-start">
-        <table>
-          <thead>
-            <tr>
-              <th>ორშ</th>
-              <th>სამ</th>
-              <th>ოთხ</th>
-              <th>ხუთ</th>
-              <th>პარ</th>
-              <th>შაბ</th>
-              <th>კვი</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
+    <div
+      class="calendar-wrapper"
+      [style.display]="displayCalendarPopup ? 'block' : 'none'"
+    >
+      <div class="calendar-content label">
+        <div class="calendar calendar-start">
+          <fa-icon class="arrow" [icon]="leftArrowIcon"></fa-icon>
+          <button class="date-button">{{ firstDate | date }}</button>
+          <fa-icon class="arrow" [icon]="rightArrowIcon"></fa-icon>
+        </div>
+        <div class="calendar calendar-end">
+          <fa-icon class="arrow" [icon]="leftArrowIcon"></fa-icon>
+          <button class="date-button">{{ secondDate | date }}</button>
+          <fa-icon class="arrow" [icon]="rightArrowIcon"></fa-icon>
+        </div>
       </div>
-      <div class="calendar calendar-end"></div>
+      <div class="calendar-content value">
+        <div class="calendar calendar-start">
+          <table>
+            <thead>
+              <tr>
+                <th>ორ</th>
+                <th>სა</th>
+                <th>ოთ</th>
+                <th>ხუ</th>
+                <th>პა</th>
+                <th>შა</th>
+                <th>კვ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let week of monthWeeksViewForUi(firstDate) | keyvalue"
+              >
+                <td
+                  *ngFor="let date of week.value"
+                  [ngClass]="{
+                    currentDate: compareTwoDateWithYearMonthDate(
+                      firstDate,
+                      currentDateControl.value,
+                      date
+                    )
+                  }"
+                  (click)="selectDate(firstDate, date)"
+                >
+                  {{ date }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="calendar-clock start">
+            <div class="clock hour">
+              <fa-icon [icon]="upArrowIcon"></fa-icon>
+              <div>{{ getPrefix(firstDate.getHours(), "hour") }}</div>
+              <fa-icon [icon]="downArrowIcon"></fa-icon>
+            </div>
+            :
+            <div class="clock minute">
+              <fa-icon [icon]="upArrowIcon"></fa-icon>
+              <div>{{ getPrefix(firstDate.getMinutes(), "minutes") }}</div>
+              <fa-icon [icon]="downArrowIcon"></fa-icon>
+            </div>
+            :
+            <div class="clock second">
+              <fa-icon [icon]="upArrowIcon"></fa-icon>
+              <div>{{ getPrefix(firstDate.getSeconds(), "seconds") }}</div>
+              <fa-icon [icon]="downArrowIcon"></fa-icon>
+            </div>
+          </div>
+        </div>
+        <div class="calendar calendar-end">
+          <table>
+            <thead>
+              <tr>
+                <th>ორ</th>
+                <th>სა</th>
+                <th>ოთ</th>
+                <th>ხუ</th>
+                <th>პა</th>
+                <th>შა</th>
+                <th>კვ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let week of monthWeeksViewForUi(secondDate) | keyvalue"
+              >
+                <td
+                  *ngFor="let date of week.value"
+                  [ngClass]="{
+                    currentDate: compareTwoDateWithYearMonthDate(
+                      secondDate,
+                      currentDateControl.value,
+                      date
+                    )
+                  }"
+                >
+                  {{ date }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="calendar-clock end">
+            <div class="clock hour">
+              <fa-icon [icon]="upArrowIcon"></fa-icon>
+              <div>{{ getPrefix(secondDate.getHours(), "hour") }}</div>
+              <fa-icon [icon]="downArrowIcon"></fa-icon>
+            </div>
+            :
+            <div class="clock minute">
+              <fa-icon [icon]="upArrowIcon"></fa-icon>
+              <div>{{ getPrefix(secondDate.getMinutes(), "minutes") }}</div>
+              <fa-icon [icon]="downArrowIcon"></fa-icon>
+            </div>
+            :
+            <div class="clock second">
+              <fa-icon [icon]="upArrowIcon"></fa-icon>
+              <div>{{ getPrefix(secondDate.getSeconds(), "seconds") }}</div>
+              <fa-icon [icon]="downArrowIcon"></fa-icon>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </form>
 </div>
