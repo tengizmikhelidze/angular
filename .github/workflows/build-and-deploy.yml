@@ -28,7 +28,7 @@ jobs:
       - name: Update my-file.json description
         uses: jossef/action-set-json-field@v2
         with:
-          file: config.json
+          file: src/config.json
           field: baseHref
           value: "/angular/"
 
