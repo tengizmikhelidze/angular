@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AppConfig } from '../models';
 import { environment } from '@environment';
-const CONFIG_URL: string = '/config.json';
+const CONFIG_URL: string = 'src/config.json';
 @Injectable({
   providedIn: 'root',
 })
