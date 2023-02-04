@@ -20,7 +20,6 @@ export class AppConfigService {
       })
       .catch((error) => {
         console.log('Cant Read Config.JSON\n\n', error);
-        window.location.reload();
       });
   }
 
