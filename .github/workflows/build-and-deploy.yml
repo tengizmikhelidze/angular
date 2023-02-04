@@ -10,41 +10,36 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
-
+  build: 
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [14.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-    
+
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        
+
     - name: Npm Install
       run: npm i
-      
+
     - name: Install dependencies
       run: npm ci
-      
+
     - name: Build
       run: npm run build:prod  
-      
-  deploy:
-    
+  
+  Deploy:
     runs-on: ubuntu-latest
-    
-    steps:
+    steps: 
     - name: Deploy to GitHub Pages
       uses: crazy-max/ghaction-github-pages@v3
       with:
         target_branch: gh-pages
         build_dir: dist/shared-components
+      
