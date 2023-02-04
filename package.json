@@ -9,7 +9,7 @@
     "test": "ng test",
     "prepare": "husky install",
     "prettier": "pretty-quick --staged",
-    "build:prod": "ng build --configuration=production --base-href=https://tengizmikhelidze.github.io/angular"
+    "build:prod": "ng build --configuration=production --base-href=https://tengizmikhelidze.github.io/angular/"
   },
   "private": true,
   "dependencies": {
