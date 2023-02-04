@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationBarComponent } from '../shared';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { AppConfigService, InitConfig } from '@app-core';
 
 const Imports = [
   BrowserModule,
@@ -19,7 +19,14 @@ const Declarations = [AppComponent];
 @NgModule({
   declarations: [...Declarations],
   imports: [...Imports],
-  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: InitConfig,
+      deps: [AppConfigService],
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

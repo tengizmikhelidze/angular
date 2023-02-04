@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder } from '@angular/forms';
+import { environment } from '../../../../../environment';
 
 @Component({
   selector: 'app-inputs-wrapper',
@@ -8,6 +9,7 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./inputs-wrapper.component.scss'],
 })
 export class InputsWrapperComponent {
+  readonly environment = environment;
   readonly checkIcon = faClock;
   public form = this.fb.group({
     checkboxes: this.fb.group({
@@ -18,7 +20,6 @@ export class InputsWrapperComponent {
       checkbox5: [false],
     }),
   });
-  checkbox2value: boolean = true;
 
   constructor(private fb: FormBuilder) {
     this.form.valueChanges.subscribe((next) => {

@@ -1,6 +1,8 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { AppConfigService } from '../../../../core';
+import { environment } from '../../../../../environment';
 
 @Component({
   selector: 'app-checkbox',
@@ -18,15 +20,14 @@ export class CheckboxComponent implements ControlValueAccessor {
   @Input() id: string = '';
   @Input() label: string = '';
   @Input() iconDefinition: IconDefinition | undefined;
-  @Input() iconUrl: string = '/assets/svgs/check-white.svg';
+  @Input() iconUrl: string =
+    environment.baseHref + 'assets/svgs/check-white.svg';
   @Input() labelStyles: {} = {};
   @Input() inputStyles: {} = {};
   @Input() iconStyles: {} = {};
 
   public val: boolean = false; // ამ ველს ვწვდებით კომპონენტის შიგნით
 
-  onChange: any = () => {};
-  onTouch: any = () => {};
   set value(val: boolean) {
     if (val !== undefined && this.val !== val) {
       this.val = val;
@@ -34,6 +35,11 @@ export class CheckboxComponent implements ControlValueAccessor {
       this.onTouch(val);
     }
   }
+
+  constructor(public appConfigService: AppConfigService) {}
+
+  onChange: any = () => {};
+  onTouch: any = () => {};
 
   // არეგისტრირებს value-ს ცვლილების დროს რომელი ფუქნცია უნდა გამოიძახოს
   writeValue(value: any) {
