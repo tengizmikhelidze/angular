@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavigationBar } from './interfaces/navigation-bar.interface';
-import { faItalic } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarDays, faItalic } from '@fortawesome/free-solid-svg-icons';
 import { NgForOf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -15,11 +15,11 @@ import { TooltipModule } from '../../modules/tooltip/tooltip.module';
 })
 export class NavigationBarComponent {
   navigationBar: NavigationBar[] = [
-    // {
-    //   icon: faCalendarDays,
-    //   label: 'Calendar',
-    //   routerLink: '/app/calendar',
-    // },
+    {
+      icon: faCalendarDays,
+      label: 'Calendar',
+      routerLink: '/app/calendar',
+    },
     {
       icon: faItalic,
       label: 'Inputs',
