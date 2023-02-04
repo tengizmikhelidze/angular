@@ -1,13 +1,18 @@
-<div class="inputs-wrapper">
+<form class="inputs-wrapper" [formGroup]="form">
   <div class="inputs-content">
     <div class="gird-wrapper">
       <div class="grid-columns column column-1">
         <h3 class="column-header">
           Checkboxes <span>(select checkbox to see difference)</span>
         </h3>
-        <ul class="column-list">
+        <ul class="column-list" formGroupName="checkboxes">
           <li>
-            <app-checkbox [id]="'first'" [label]="'Label'"></app-checkbox>
+            <app-checkbox
+              [id]="'first'"
+              [label]="'Label'"
+              formControlName="checkbox1"
+            >
+            </app-checkbox>
           </li>
           <li>
             <app-checkbox
@@ -45,4 +50,4 @@
       </div>
     </div>
   </div>
-</div>
+</form>
