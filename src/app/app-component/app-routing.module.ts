@@ -5,7 +5,6 @@ import { PageNotFoundComponent } from '../shared';
 const routes: Routes = [
   {
     path: 'app',
-    pathMatch: 'full',
     loadChildren: () =>
       import('../features/features.module').then((m) => m.FeaturesModule),
   },
