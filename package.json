@@ -9,7 +9,7 @@
     "prepare": "husky install",
     "prettier": "pretty-quick --staged",
     "build": "ng build",
-    "build:git": "ng build --configuration=production --base-href=/angular/",
+    "build:git": "ng build --configuration=production --base-href=/angular/ --deploy-url=/angular/",
     "build:prod": "ng build --configuration=production"
   },
   "private": true,
