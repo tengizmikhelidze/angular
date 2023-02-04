@@ -18,6 +18,7 @@ export class InputsWrapperComponent {
       checkbox5: [false],
     }),
   });
+  checkbox2value: boolean = true;
 
   constructor(private fb: FormBuilder) {
     this.form.valueChanges.subscribe((next) => {

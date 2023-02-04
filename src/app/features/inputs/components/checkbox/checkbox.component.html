@@ -7,6 +7,7 @@
       [(ngModel)]="value"
       [id]="'checkbox ' + this.id"
       [style]="inputStyles"
+      [checked]="this.val"
     />
     <div class="check-icon" (click)="checkboxInput.click()">
       <img
