@@ -18,12 +18,12 @@ export class NavigationBarComponent {
     {
       icon: faCalendarDays,
       label: 'Calendar',
-      routerLink: '/app/calendar',
+      routerLink: '/calendar',
     },
     {
       icon: faItalic,
       label: 'Inputs',
-      routerLink: '/app/inputs',
+      routerLink: '/inputs',
     },
   ];
 }

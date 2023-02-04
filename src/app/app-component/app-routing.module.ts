@@ -4,14 +4,9 @@ import { PageNotFoundComponent } from '../shared';
 
 const routes: Routes = [
   {
-    path: 'app',
+    path: '',
     loadChildren: () =>
       import('../features/features.module').then((m) => m.FeaturesModule),
-  },
-  {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: 'app',
   },
   {
     path: '**',
@@ -21,7 +16,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

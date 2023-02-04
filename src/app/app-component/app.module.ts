@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { NavigationBarComponent } from '../shared';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppConfigService, InitConfig } from '@app-core';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 const Imports = [
   BrowserModule,
@@ -20,12 +21,14 @@ const Declarations = [AppComponent];
   declarations: [...Declarations],
   imports: [...Imports],
   providers: [
+    Location,
     {
       provide: APP_INITIALIZER,
       useFactory: InitConfig,
       deps: [AppConfigService],
       multi: true,
     },
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
   ],
   bootstrap: [AppComponent],
 })
