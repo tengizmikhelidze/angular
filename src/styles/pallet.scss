@@ -1,17 +1,31 @@
 // ============== Backgrounds ==============
 $background-navigate-light: #e5eff9;
+$background-inputs: #f9fafa;
+$background-inputs-tbc: #00adee;
 // ============== Backgrounds ==============
 
 // ============== Colors ==============
 $color-tbc-blue-light: #00a9e8;
+$color-label: #141719;
 // ============== Colors ==============
+
+// ============== Borders ==============
+$border-inputs: #bcc1c2;
+// ============== Borders ==============
 
 :root {
   // ============== Backgrounds ==============
   --background-navigate-light: #{$background-navigate-light};
+  --background-inputs: #{$background-inputs};
+  --background-inputs-tbc: #{$background-inputs-tbc};
   // ============== Backgrounds ==============
 
   // ============== Colors ==============
   --color-tbc-blue-light: #{$color-tbc-blue-light};
+  --color-label-checkbox: #{$color-label};
   // ============== Colors ==============
+
+  // ============== Borders ==============
+  --border-inputs: #{$border-inputs};
+  // ============== Borders ==============
 }

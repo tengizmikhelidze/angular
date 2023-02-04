@@ -7,12 +7,16 @@
   background: var(--background-navigate-light);
   li {
     cursor: pointer;
+    transition: 0.2s ease-in;
+    &:not(:last-child) {
+      margin-right: 20px;
+    }
+    &:hover {
+      transform: translateY(-5px);
+    }
     fa-icon {
       font-size: 25px;
       color: var(--color-tbc-blue-light);
-    }
-    &:not(:last-child) {
-      margin-right: 10px;
     }
   }
 }

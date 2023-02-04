@@ -1,0 +1,29 @@
+<div class="checkbox-wrapper">
+  <div class="checkbox-container">
+    <input
+      #checkboxInput
+      type="checkbox"
+      id="checkbox"
+      [id]="'checkbox ' + this.id"
+      [style]="inputStyles"
+    />
+    <div class="check-icon" (click)="checkboxInput.click()">
+      <img
+        *ngIf="!iconDefinition"
+        alt="V"
+        [src]="iconUrl"
+        [style]="iconStyles"
+      />
+      <fa-icon
+        *ngIf="iconDefinition"
+        [icon]="iconDefinition"
+        [style]="iconStyles"
+      >
+      </fa-icon>
+    </div>
+  </div>
+
+  <label *ngIf="this.label" for="checkbox" [style]="labelStyles">
+    {{ this.label }}
+  </label>
+</div>

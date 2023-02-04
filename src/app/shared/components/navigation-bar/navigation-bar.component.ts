@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavigationBar } from './interfaces/navigation-bar.interface';
-import { faCalendarDays } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarDays, faItalic } from '@fortawesome/free-solid-svg-icons';
 import { NgForOf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -19,6 +19,11 @@ export class NavigationBarComponent {
       icon: faCalendarDays,
       label: 'Calendar',
       routerLink: '/app/calendar',
+    },
+    {
+      icon: faItalic,
+      label: 'Inputs',
+      routerLink: '/app/inputs',
     },
   ];
 }

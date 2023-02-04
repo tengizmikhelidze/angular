@@ -1,0 +1,48 @@
+<div class="inputs-wrapper">
+  <div class="inputs-content">
+    <div class="gird-wrapper">
+      <div class="grid-columns column column-1">
+        <h3 class="column-header">
+          Checkboxes <span>(select checkbox to see difference)</span>
+        </h3>
+        <ul class="column-list">
+          <li>
+            <app-checkbox [id]="'first'" [label]="'Label'"></app-checkbox>
+          </li>
+          <li>
+            <app-checkbox
+              [id]="'first'"
+              [label]="'Label სტილები'"
+              [labelStyles]="{ 'font-weight': 'bold' }"
+            ></app-checkbox>
+          </li>
+          <li>
+            <app-checkbox
+              [id]="'first'"
+              [label]="'Input სტილები'"
+              [inputStyles]="{
+                'background-color': 'wheat'
+              }"
+            ></app-checkbox>
+          </li>
+          <li>
+            <app-checkbox
+              [id]="'first'"
+              [label]="'Svg or Png Or any image Icon with url'"
+              [iconUrl]="'/assets/svgs/check-black.svg'"
+              [iconStyles]="{ color: 'red' }"
+            ></app-checkbox>
+          </li>
+          <li>
+            <app-checkbox
+              [id]="'first'"
+              [label]="'FontAwesome Icon with styles'"
+              [iconDefinition]="checkIcon"
+              [iconStyles]="{ color: 'red' }"
+            ></app-checkbox>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

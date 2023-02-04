@@ -1,0 +1,40 @@
+.inputs-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .inputs-content {
+    width: 80%;
+    height: 80%;
+  }
+}
+
+.gird-wrapper {
+  display: grid;
+  grid-template-columns: auto;
+
+  .grid-columns {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-row-gap: 10px;
+
+    .column-header {
+      font-weight: bold;
+      letter-spacing: 1px;
+      span {
+        font-weight: 400;
+        font-size: 12px;
+      }
+    }
+
+    .column-list {
+      li {
+        &:not(:last-child) {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}
