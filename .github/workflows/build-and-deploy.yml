@@ -30,7 +30,7 @@ jobs:
         with:
           file: config.json
           field: baseHref
-          value: ${{/angular/}}
+          value: "/angular/"
 
       - name: Npm Install
         run: npm i
