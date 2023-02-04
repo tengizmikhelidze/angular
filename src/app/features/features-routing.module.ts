@@ -8,7 +8,7 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'calendar',
+        redirectTo: 'inputs',
       },
       {
         path: 'calendar',
