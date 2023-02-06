@@ -1,29 +1,17 @@
-import { Component, forwardRef, Input } from '@angular/core';
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { environment } from '../../../../../environment';
+import { Component, Input } from '@angular/core';
+import { ControlValueAccessor } from '@angular/forms';
 
 @Component({
-  selector: 'app-checkbox',
-  templateUrl: './checkbox.component.html',
-  styleUrls: ['./checkbox.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => CheckboxComponent),
-      multi: true,
-    },
-  ],
+  selector: 'app-radio',
+  templateUrl: './radio.component.html',
+  styleUrls: ['./radio.component.scss'],
 })
-export class CheckboxComponent implements ControlValueAccessor {
+export class RadioComponent implements ControlValueAccessor {
   @Input() id: string = '';
   @Input() label: string = '';
-  @Input() iconDefinition: IconDefinition | undefined;
-  @Input() iconUrl: string =
-    environment.baseHref + 'assets/svgs/check-white.svg';
   @Input() labelStyles: {} = {};
   @Input() inputStyles: {} = {};
-  @Input() iconStyles: {} = {};
+  @Input() name: string = '';
 
   public val: boolean = false; // ამ ველს ვწვდებით კომპონენტის შიგნით
 

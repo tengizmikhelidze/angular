@@ -15,7 +15,9 @@
 
 .gird-wrapper {
   display: grid;
+  grid-auto-flow: column;
   grid-template-columns: auto;
+  align-items: start;
 
   .grid-columns {
     display: grid;

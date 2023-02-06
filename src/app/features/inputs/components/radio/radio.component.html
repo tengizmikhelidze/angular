@@ -1,0 +1,17 @@
+<div class="checkbox-wrapper">
+  <div class="checkbox-container">
+    <input
+      #radioInput
+      type="radio"
+      id="checkbox"
+      [name]="name"
+      [(ngModel)]="value"
+      [id]="'checkbox ' + this.id"
+      [style]="inputStyles"
+    />
+  </div>
+
+  <label *ngIf="this.label" for="checkbox" [style]="labelStyles">
+    {{ this.label }}
+  </label>
+</div>
