@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --serve-path=/angular/ -o",
+    "start": "ng serve -0",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "prepare": "husky install",
     "prettier": "pretty-quick --staged",
     "build": "ng build",
-    "build:git": "ng build --configuration=production --base-href=/angular/ --deploy-url=/angular/ --aot --output-hashing=all",
+    "build:git": "ng build --configuration=production",
     "build:prod": "ng build --configuration=production",
     "build:test": "ng build --configuration=production --base-href=/ --deploy-url=/ --aot --output-hashing=all"
   },
