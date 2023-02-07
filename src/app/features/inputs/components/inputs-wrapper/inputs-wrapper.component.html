@@ -20,12 +20,14 @@
               [id]="'first'"
               [label]="'Label სტილები'"
               [labelStyles]="{ 'font-weight': 'bold' }"
+              formControlName="checkbox2"
             ></app-checkbox>
           </li>
           <li>
             <app-checkbox
               [id]="'first'"
               [label]="'Input სტილები'"
+              formControlName="checkbox3"
               [inputStyles]="{
                 'background-color': 'wheat'
               }"
@@ -37,6 +39,7 @@
               [label]="'Svg or Png Or any image Icon with url'"
               [iconUrl]="environment.baseHref + 'assets/svgs/check-black.svg'"
               [iconStyles]="{ color: 'red' }"
+              formControlName="checkbox4"
             ></app-checkbox>
           </li>
           <li>
@@ -45,18 +48,30 @@
               [label]="'FontAwesome Icon with styles'"
               [iconDefinition]="checkIcon"
               [iconStyles]="{ color: 'red' }"
+              formControlName="checkbox5"
             ></app-checkbox>
           </li>
         </ul>
       </div>
       <div class="grid-columns column column-2">
         <h3 class="column-header">Radio Buttons</h3>
-        <ul class="column-list">
+        <ul class="column-list" [formGroupName]="'radios'">
           <li>
-            <app-radio></app-radio>
+            <app-radio
+              [name]="'te'"
+              [formControlName]="'maleFemale'"
+              [radioValue]="'male'"
+              [label]="'Male'"
+            ></app-radio>
           </li>
           <li>
-            <app-radio></app-radio>
+            <app-radio
+              [name]="'te'"
+              [formControlName]="'maleFemale'"
+              [radioValue]="'female'"
+              [label]="'Female'"
+              [labelStyles]="{ 'font-weight': 'bold' }"
+            ></app-radio>
           </li>
         </ul>
       </div>

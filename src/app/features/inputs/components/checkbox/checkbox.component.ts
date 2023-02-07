@@ -1,4 +1,11 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import {
+  AfterContentChecked,
+  Component,
+  ElementRef,
+  forwardRef,
+  Input,
+  ViewChild,
+} from '@angular/core';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { environment } from '../../../../../environment';
@@ -15,7 +22,9 @@ import { environment } from '../../../../../environment';
     },
   ],
 })
-export class CheckboxComponent implements ControlValueAccessor {
+export class CheckboxComponent
+  implements ControlValueAccessor, AfterContentChecked
+{
   @Input() id: string = '';
   @Input() label: string = '';
   @Input() iconDefinition: IconDefinition | undefined;
@@ -24,14 +33,27 @@ export class CheckboxComponent implements ControlValueAccessor {
   @Input() labelStyles: {} = {};
   @Input() inputStyles: {} = {};
   @Input() iconStyles: {} = {};
+  @ViewChild('checkboxInput') checkboxInput:
+    | ElementRef<HTMLInputElement>
+    | undefined;
 
-  public val: boolean = false; // ამ ველს ვწვდებით კომპონენტის შიგნით
+  public val: boolean | undefined; // ამ ველს ვწვდებით კომპონენტის შიგნით
+  private defaultValueAlreadyChecked: boolean = false;
 
   set value(val: boolean) {
-    if (val !== undefined && this.val !== val) {
-      this.val = val;
-      this.onChange(val);
-      this.onTouch(val);
+    this.val = val;
+    this.onChange(val);
+    this.onTouch(val);
+  }
+
+  ngAfterContentChecked() {
+    if (
+      !this.defaultValueAlreadyChecked &&
+      this.checkboxInput &&
+      typeof this.val === 'boolean'
+    ) {
+      this.checkboxInput.nativeElement.checked = this.val;
+      this.defaultValueAlreadyChecked = true;
     }
   }
 

@@ -1,25 +1,55 @@
-import { Component, Input } from '@angular/core';
-import { ControlValueAccessor } from '@angular/forms';
+import {
+  AfterContentChecked,
+  Component,
+  ElementRef,
+  forwardRef,
+  Input,
+  ViewChild,
+} from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-radio',
   templateUrl: './radio.component.html',
   styleUrls: ['./radio.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => RadioComponent),
+      multi: true,
+    },
+  ],
 })
-export class RadioComponent implements ControlValueAccessor {
+export class RadioComponent
+  implements ControlValueAccessor, AfterContentChecked
+{
   @Input() id: string = '';
+  @Input() radioValue: string = ''; // აუცილებელი ველია
   @Input() label: string = '';
   @Input() labelStyles: {} = {};
   @Input() inputStyles: {} = {};
   @Input() name: string = '';
+  @ViewChild('radioInput') radioInput: ElementRef<HTMLInputElement> | undefined;
 
-  public val: boolean = false; // ამ ველს ვწვდებით კომპონენტის შიგნით
+  public val: any; // ამ ველს ვწვდებით კომპონენტის შიგნითის შიგნით
+  private defaultValueAlreadyChecked: boolean = false;
 
   set value(val: boolean) {
     if (val !== undefined && this.val !== val) {
       this.val = val;
       this.onChange(val);
       this.onTouch(val);
+    }
+  }
+
+  ngAfterContentChecked() {
+    if (
+      !this.defaultValueAlreadyChecked &&
+      this.radioInput &&
+      this.val === this.radioValue
+    ) {
+      this.radioInput.nativeElement.checked = this.val;
+      this.defaultValueAlreadyChecked = true;
     }
   }
 

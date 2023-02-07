@@ -3,15 +3,16 @@
     <input
       #radioInput
       type="radio"
-      id="checkbox"
+      id="radio"
+      [value]="radioValue"
       [name]="name"
       [(ngModel)]="value"
-      [id]="'checkbox ' + this.id"
+      [id]="'radio ' + this.id"
       [style]="inputStyles"
     />
   </div>
 
-  <label *ngIf="this.label" for="checkbox" [style]="labelStyles">
+  <label *ngIf="this.label" for="radio" [style]="labelStyles">
     {{ this.label }}
   </label>
 </div>
