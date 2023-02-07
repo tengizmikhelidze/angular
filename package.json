@@ -9,9 +9,9 @@
     "prepare": "husky install",
     "prettier": "pretty-quick --staged",
     "build": "ng build",
-    "build:git": "ng build --configuration=production --base-href=/angular/ --deploy-url=/angular/",
+    "build:git": "ng build --configuration=production --base-href=/tengizmikhelidze.github.io/angular/ && ngh --dir=dist/shared-components --deploy-url=/tengizmikhelidze.github.io/angular/",
     "build:prod": "ng build --configuration=production",
-    "build:test": "ng build --configuration=production --base-href=/ --deploy-url=/ --aot --output-hashing=all"
+    "build:test": "ng build --configuration=production --base-href=/ --deploy-url=/"
   },
   "private": true,
   "dependencies": {
