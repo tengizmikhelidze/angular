@@ -11,6 +11,7 @@ $color-label: #141719;
 
 // ============== Borders ==============
 $border-inputs: #bcc1c2;
+$border-inputs-invalid: #ef4343;
 // ============== Borders ==============
 
 :root {
@@ -27,5 +28,6 @@ $border-inputs: #bcc1c2;
 
   // ============== Borders ==============
   --border-inputs: #{$border-inputs};
+  --border-inputs-invalid: #{$border-inputs-invalid};
   // ============== Borders ==============
 }

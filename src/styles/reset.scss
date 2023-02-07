@@ -449,3 +449,10 @@ textarea {
 label {
   color: var(--color-label-checkbox);
 }
+
+//Default-input-error-border
+.ng-invalid.ng-touched {
+  input {
+    border-color: var(--border-inputs-invalid) !important;
+  }
+}

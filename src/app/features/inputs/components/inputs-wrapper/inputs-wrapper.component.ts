@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { environment } from '../../../../../environment';
 
 @Component({
@@ -15,7 +15,7 @@ export class InputsWrapperComponent {
     checkboxes: this.fb.group({
       checkbox1: [false],
       checkbox2: [false],
-      checkbox3: [false],
+      checkbox3: [false, [Validators.required]],
       checkbox4: [true],
       checkbox5: [true],
     }),
