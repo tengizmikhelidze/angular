@@ -15,8 +15,10 @@ export class AppConfigService {
           ...this.appConfig,
           ...config,
         };
-        environment.apiUrl = this.appConfig.apiUrl;
-        environment.baseHref = this.appConfig.baseHref;
+        for (let key of Object.keys(this.appConfig)) {
+          // @ts-ignore
+          environment[key] = this.appConfig[key];
+        }
       })
       .catch((error) => {
         console.log('Cant Read Config.JSON\n\n', error);

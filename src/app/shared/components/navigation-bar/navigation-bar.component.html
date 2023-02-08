@@ -1,4 +1,7 @@
 <ul class="navigation-wrapper">
+  <span class="version-span"
+    >version: {{ environment.appVersion }}--{{ environment.environment }}</span
+  >
   <li
     *ngFor="let nav of navigationBar"
     [routerLink]="nav.routerLink"

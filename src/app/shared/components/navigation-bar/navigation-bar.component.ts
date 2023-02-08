@@ -5,6 +5,7 @@ import { NgForOf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TooltipModule } from '../../modules/tooltip/tooltip.module';
+import { environment } from '@environment';
 
 @Component({
   standalone: true,
@@ -14,6 +15,7 @@ import { TooltipModule } from '../../modules/tooltip/tooltip.module';
   styleUrls: ['./navigation-bar.component.scss'],
 })
 export class NavigationBarComponent {
+  environment = environment;
   navigationBar: NavigationBar[] = [
     {
       icon: faCalendarDays,

@@ -4,4 +4,5 @@ export const environment: AppConfig = {
   baseHref: '/',
   apiUrl: '/',
   appVersion: require('../../package.json').version,
+  environment: 'dev',
 };
