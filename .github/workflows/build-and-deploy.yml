@@ -31,13 +31,13 @@ jobs:
           file: src/config.json
           field: baseHref
           value: "/angular/"
-          
+
       - name: Update config.json environment
         uses: jossef/action-set-json-field@v2
         with:
           file: src/config.json
           field: environment
-          value: "production"
+          value: "prod"
 
       - name: Npm Install
         run: npm i
