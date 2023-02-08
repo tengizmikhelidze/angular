@@ -1,6 +1,6 @@
 {
   "name": "shared-components",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port=2121 -o",
@@ -11,7 +11,10 @@
     "build": "ng build",
     "build:git": "ng build --configuration=production --base-href=/angular/ --deploy-url=/angular/",
     "build:prod": "ng build --configuration=production",
-    "build:test": "ng build --configuration=production --base-href=/ --deploy-url=/ --aot --output-hashing=all"
+    "build:test": "ng build --configuration=production --base-href=/ --deploy-url=/ --aot --output-hashing=all",
+    "version_major": "npm --no-git-tag-version version major",
+    "version_minor": "npm --no-git-tag-version version minor",
+    "version_patch": "npm --no-git-tag-version version patch"
   },
   "private": true,
   "dependencies": {
