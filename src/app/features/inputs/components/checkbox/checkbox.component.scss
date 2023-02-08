@@ -1,3 +1,11 @@
+:host {
+  &.ng-invalid.ng-touched {
+    input[type="checkbox"]:not(.disabled) {
+      border-color: var(--border-inputs-invalid) !important;
+    }
+  }
+}
+
 .checkbox-wrapper {
   width: auto;
   height: auto;

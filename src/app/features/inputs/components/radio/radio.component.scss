@@ -1,3 +1,11 @@
+:host {
+  &.ng-invalid.ng-touched {
+    input[type="radio"]:not(.disabled) {
+      border-color: var(--border-inputs-invalid) !important;
+    }
+  }
+}
+
 .radio-wrapper {
   width: auto;
   height: auto;

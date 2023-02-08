@@ -15,7 +15,7 @@ export class InputsWrapperComponent {
     checkboxes: this.fb.group({
       checkbox1: [false],
       checkbox2: [false],
-      checkbox3: [false, [Validators.required]],
+      checkbox3: ['', [Validators.required]],
       checkbox4: [true],
       checkbox5: [true],
     }),
