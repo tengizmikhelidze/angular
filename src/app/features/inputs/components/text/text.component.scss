@@ -30,7 +30,7 @@
       }
     }
 
-    &:not(.disabled):hover {
+    &:not(.disabled):not(:focus-within):hover {
       border-color: var(--border-inputs-text-hover);
     }
 

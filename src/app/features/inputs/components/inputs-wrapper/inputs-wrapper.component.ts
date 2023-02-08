@@ -23,7 +23,8 @@ export class InputsWrapperComponent {
       maleFemale: ['male'],
     }),
     textInputs: this.fb.group({
-      textInput1: [{ value: 'text', disabled: true }, Validators.required],
+      textInput1: [{ value: 'text', disabled: true }, [Validators.required]],
+      textInput2: ['', [Validators.required, Validators.pattern(/გვარი/)]],
     }),
   });
 
