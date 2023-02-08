@@ -1,11 +1,18 @@
 <div class="text-input-wrapper">
-  <div class="text-input-container" (click)="textInput.focus()">
+  <div
+    class="text-input-container"
+    (click)="textInput.focus()"
+    [ngClass]="{ disabled: isDisabled }"
+  >
     <label
       *ngIf="this.placeHolder"
       class="input-label"
       for="textInput"
       [style]="placeHolderStyles"
-      [ngClass]="hasInputValue() ? 'float' : ''"
+      [ngClass]="{
+        float: hasInputValue(),
+        disabled: isDisabled
+      }"
     >
       {{ this.placeHolder }}
     </label>
@@ -17,6 +24,7 @@
       [(ngModel)]="value"
       [id]="'textInput ' + this.id"
       [style]="inputStyles"
+      [disabled]="isDisabled"
     />
   </div>
 </div>

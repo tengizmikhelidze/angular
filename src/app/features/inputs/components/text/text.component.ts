@@ -29,6 +29,7 @@ export class TextComponent
   @Input() inputStyles: {} = {};
   @ViewChild('textInput') textInput: ElementRef<HTMLInputElement> | undefined;
 
+  public isDisabled: boolean = false;
   public val: any; // ამ ველს ვწვდებით კომპონენტის შიგნითის შიგნით
   private defaultValueAlreadyChecked: boolean = false;
 
@@ -63,6 +64,10 @@ export class TextComponent
   // არეგისტრირებს onTouched ივენთის დროს რომელი ფუნქცია უნდა გამოიძხოს
   registerOnTouched(fn: any) {
     this.onTouch = fn;
+  }
+
+  setDisabledState(isDisabled: boolean) {
+    this.isDisabled = isDisabled;
   }
 
   hasInputValue() {

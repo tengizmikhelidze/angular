@@ -20,7 +20,17 @@
     box-sizing: border-box;
     align-items: center;
 
-    &:hover {
+    &.disabled {
+      border-color: transparent;
+      color: var(--color-text-disabled);
+      background-color: var(--background-inputs-disabled);
+
+      input[type="text"] {
+        color: var(--color-text-disabled);
+      }
+    }
+
+    &:not(.disabled):hover {
       border-color: var(--border-inputs-text-hover);
     }
 

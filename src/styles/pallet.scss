@@ -1,6 +1,7 @@
 // ============== Backgrounds ==============
 $background-navigate-light: #e5eff9;
 $background-inputs: #f9fafa;
+$background-inputs-disabled: #e9ebec;
 $background-inputs-text: #ffffff;
 $background-inputs-tbc: #00adee;
 // ============== Backgrounds ==============
@@ -10,6 +11,7 @@ $color-tbc-blue-light: #00a9e8;
 $color-tbc: #00adee;
 $color-label: #141719;
 $color-text: #141719;
+$color-text-disabled: #a5aaac;
 $color-text-placeholder: #555f62;
 // ============== Colors ==============
 
@@ -25,6 +27,7 @@ $border-inputs-invalid: #ef4343;
   // ============== Backgrounds ==============
   --background-navigate-light: #{$background-navigate-light};
   --background-inputs: #{$background-inputs};
+  --background-inputs-disabled: #{$background-inputs-disabled};
   --background-inputs-text: #{$background-inputs-text};
   --background-inputs-tbc: #{$background-inputs-tbc};
   // ============== Backgrounds ==============
@@ -34,6 +37,7 @@ $border-inputs-invalid: #ef4343;
   --color-tbc: #{$color-tbc};
   --color-label-checkbox: #{$color-label};
   --color-text: #{$color-text};
+  --color-text-disabled: #{$color-text-disabled};
   --color-text-placeholder: #{$color-text-placeholder};
   // ============== Colors ==============
 
