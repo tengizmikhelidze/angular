@@ -75,6 +75,20 @@
           </li>
         </ul>
       </div>
+      <div class="grid-columns column column-3">
+        <h3 class="column-header">Text Inputs</h3>
+        <ul class="column-list" [formGroupName]="'textInputs'">
+          <li>
+            <app-text-input
+              [placeHolder]="
+                'სახელი და ძალიან დიდი ლაბელი რომელიც არ შეიძლება იყოს დიდი'
+              "
+              formControlName="textInput1"
+            >
+            </app-text-input>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </form>

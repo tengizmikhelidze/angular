@@ -1,0 +1,65 @@
+.text-input-wrapper {
+  width: auto;
+  height: auto;
+  display: block;
+
+  .text-input-container {
+    position: relative;
+    width: 150px;
+    height: 40px;
+    background: var(--background-inputs-text);
+    color: var(--color-text);
+    border: 0.5px solid var(--border-inputs-text);
+    border-radius: 4px;
+    font-weight: 400;
+    font-size: 12px;
+    padding: 2px 8px;
+    cursor: text;
+    display: grid;
+    grid-auto-flow: row;
+    box-sizing: border-box;
+
+    &:hover {
+      border-color: var(--border-inputs-text-hover);
+    }
+
+    &:focus-within {
+      border-color: var(--border-inputs-tbc);
+
+      .input-label {
+        color: var(--color-tbc);
+        @extend .float;
+      }
+    }
+
+    input[type="text"] {
+      background: none;
+      border: none;
+      width: 100%;
+      height: auto;
+      padding: 0;
+    }
+
+    .input-label {
+      position: absolute;
+      left: 9px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-weight: 400;
+      font-size: 12px;
+      width: calc(100% - 16px);
+      color: var(--color-text-placeholder);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      &.float {
+        position: relative;
+        transform: translateY(0);
+        top: 0;
+        left: 0;
+        width: 100%;
+      }
+    }
+  }
+}

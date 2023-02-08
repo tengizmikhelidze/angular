@@ -1,16 +1,23 @@
 // ============== Backgrounds ==============
 $background-navigate-light: #e5eff9;
 $background-inputs: #f9fafa;
+$background-inputs-text: #ffffff;
 $background-inputs-tbc: #00adee;
 // ============== Backgrounds ==============
 
 // ============== Colors ==============
 $color-tbc-blue-light: #00a9e8;
+$color-tbc: #00adee;
 $color-label: #141719;
+$color-text: #141719;
+$color-text-placeholder: #555f62;
 // ============== Colors ==============
 
 // ============== Borders ==============
 $border-inputs: #bcc1c2;
+$border-inputs-tbc: #00adee;
+$border-inputs-text: #a5aaac;
+$border-inputs-text-hover: #555f62;
 $border-inputs-invalid: #ef4343;
 // ============== Borders ==============
 
@@ -18,16 +25,23 @@ $border-inputs-invalid: #ef4343;
   // ============== Backgrounds ==============
   --background-navigate-light: #{$background-navigate-light};
   --background-inputs: #{$background-inputs};
+  --background-inputs-text: #{$background-inputs-text};
   --background-inputs-tbc: #{$background-inputs-tbc};
   // ============== Backgrounds ==============
 
   // ============== Colors ==============
   --color-tbc-blue-light: #{$color-tbc-blue-light};
+  --color-tbc: #{$color-tbc};
   --color-label-checkbox: #{$color-label};
+  --color-text: #{$color-text};
+  --color-text-placeholder: #{$color-text-placeholder};
   // ============== Colors ==============
 
   // ============== Borders ==============
   --border-inputs: #{$border-inputs};
+  --border-inputs-tbc: #{$border-inputs-tbc};
+  --border-inputs-text: #{$border-inputs-text};
+  --border-inputs-text-hover: #{$border-inputs-text-hover};
   --border-inputs-invalid: #{$border-inputs-invalid};
   // ============== Borders ==============
 }

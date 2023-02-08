@@ -22,6 +22,9 @@ export class InputsWrapperComponent {
     radios: this.fb.group({
       maleFemale: ['male'],
     }),
+    textInputs: this.fb.group({
+      textInput1: ['text', Validators.required],
+    }),
   });
 
   constructor(private fb: FormBuilder) {

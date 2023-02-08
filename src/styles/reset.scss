@@ -452,7 +452,10 @@ label {
 
 //Default-input-error-border
 .ng-invalid.ng-touched {
-  input {
+  input:not([type="text"]) {
+    border-color: var(--border-inputs-invalid) !important;
+  }
+  .text-input-container:not(:focus-within) {
     border-color: var(--border-inputs-invalid) !important;
   }
 }

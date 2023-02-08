@@ -7,6 +7,7 @@ import { InputsWrapperComponent } from './components/inputs-wrapper/inputs-wrapp
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RadioComponent } from './components/radio/radio.component';
+import { TextComponent } from './components/text/text.component';
 
 const Components = [InputsWrapperComponent, CheckboxComponent];
 
@@ -21,7 +22,7 @@ const ExternalModules = [FontAwesomeModule];
 
 const ExportedComponents = [CheckboxComponent];
 @NgModule({
-  declarations: [...Components, RadioComponent],
+  declarations: [...Components, RadioComponent, TextComponent],
   imports: [...InternalModules, ...ExternalModules],
   exports: [...ExportedComponents],
 })

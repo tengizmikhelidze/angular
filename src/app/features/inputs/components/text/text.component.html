@@ -1,0 +1,22 @@
+<div class="text-input-wrapper">
+  <div class="text-input-container" (click)="textInput.focus()">
+    <label
+      *ngIf="this.placeHolder"
+      class="input-label"
+      for="textInput"
+      [style]="placeHolderStyles"
+      [ngClass]="hasInputValue() ? 'float' : ''"
+    >
+      {{ this.placeHolder }}
+    </label>
+    <input
+      #textInput
+      type="text"
+      id="textInput"
+      placeholder=" "
+      [(ngModel)]="value"
+      [id]="'textInput ' + this.id"
+      [style]="inputStyles"
+    />
+  </div>
+</div>
