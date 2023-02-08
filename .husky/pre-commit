@@ -1,6 +1,60 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+if [[ -t 2 ]] || [[ -t 1 ]] || [[ $- == *i* ]];
+  then
+        exec < /dev/tty
+
+    while true; do
+        echo "Select Version Update Operation"
+        echo =================================
+        echo "1) major"
+        echo "2) minor"
+        echo "3) patch"
+        read -p "Write Answer: " answer
+
+        shopt -s nocasematch
+        if [[ $answer =~ major ]] || [[ $answer =~ 1 ]]; then
+            echo =================================
+            echo "Updating Major Version"
+            echo =================================
+            npm run version_major
+            echo =================================
+            echo "Update Complete"
+            echo =================================
+        elif [[ $answer =~ minor ]] || [[ $answer =~ 2 ]]; then
+            echo =================================
+            echo "Updating Minor Version"
+            echo =================================
+            npm run version_minor
+            echo =================================
+            echo "Update Complete"
+            echo =================================
+        elif [[ $answer =~ patch ]] || [[ $answer =~ 3 ]]; then
+            echo =================================
+            echo "Updating Patch Version"
+            echo =================================
+            npm run version_patch
+            echo =================================
+            echo "Update Complete"
+            echo =================================
+        fi
+
+        break
+    done
+  else
+    echo =================================
+    echo "Updating Minor Version"
+    echo =================================
+    npm run version_minor
+    echo =================================
+    echo "Update Complete"
+    echo =================================
+fi
+
+git add package.json
+git add package-lock.json
+
 echo "====== P r e t t i e r ======"
 
 npm run prettier

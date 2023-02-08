@@ -44,7 +44,7 @@ export class TextComponent
   ngAfterContentChecked() {
     if (!this.defaultValueAlreadyChecked && this.textInput && this.val) {
       this.textInput['nativeElement']['value'] = this.val;
-      this.defaultValueAlreadyChecked = true;
+      this.defaultValueAlreadyChecked = true
     }
   }
 
