@@ -25,12 +25,19 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
 
-      - name: Update my-file.json description
+      - name: Update config.json baseHref
         uses: jossef/action-set-json-field@v2
         with:
           file: src/config.json
           field: baseHref
           value: "/angular/"
+          
+      - name: Update config.json environment
+        uses: jossef/action-set-json-field@v2
+        with:
+          file: src/config.json
+          field: environment
+          value: "production"
 
       - name: Npm Install
         run: npm i
