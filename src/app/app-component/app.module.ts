@@ -7,6 +7,7 @@ import { NavigationBarComponent } from '../shared';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppConfigService, InitConfig } from '@app-core';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const Imports = [
   BrowserModule,
@@ -19,7 +20,7 @@ const Declarations = [AppComponent];
 
 @NgModule({
   declarations: [...Declarations],
-  imports: [...Imports],
+  imports: [...Imports, BrowserAnimationsModule],
   providers: [
     Location,
     {

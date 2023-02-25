@@ -1,211 +1,171 @@
+import { Component, Input } from '@angular/core';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import {
-  CalendarFormGroup,
-  DateFormGroup,
-} from '../interfaces/calendar-formgroup.interface';
-import { combineLatest, Subject, takeUntil } from 'rxjs';
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import {
-  faChevronDown,
   faChevronLeft,
   faChevronRight,
-  faChevronUp,
 } from '@fortawesome/free-solid-svg-icons';
+import { Months } from '../constants';
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CalendarComponent implements OnInit, OnDestroy {
-  readonly leftArrowIcon: IconDefinition = faChevronLeft;
-  readonly rightArrowIcon: IconDefinition = faChevronRight;
-  readonly upArrowIcon: IconDefinition = faChevronUp;
-  readonly downArrowIcon: IconDefinition = faChevronDown;
+export class CalendarComponent {
+  readonly leftArrow = faChevronLeft;
+  readonly rightArrow = faChevronRight;
+  @Input() selectedDate: Date | null = null;
+  currentDate: Date = new Date();
+  viewDate: Date = this.selectedDate
+    ? new Date(this.selectedDate)
+    : new Date(this.currentDate);
+  lastSelectedHeaderDate: Date = new Date(this.viewDate);
+  view: 'calendar' | 'month' | 'year' = 'calendar';
+  Months = Months;
 
-  public displayCalendarPopup: boolean = false;
-
-  form: FormGroup<CalendarFormGroup> = this.fb.group<CalendarFormGroup>({
-    firstDate: this.fb.group<DateFormGroup>({
-      day: this.fb.control('', [Validators.required]),
-      month: this.fb.control('', [Validators.required]),
-      year: this.fb.control('', [Validators.required]),
-    }),
-    secondDate: this.fb.group<DateFormGroup>({
-      day: this.fb.control('', [Validators.required]),
-      month: this.fb.control('', [Validators.required]),
-      year: this.fb.control('', [Validators.required]),
-    }),
-    currentDate: this.fb.control(new Date(), { nonNullable: true }),
-  });
-  firstDateFormGroup: FormGroup<DateFormGroup> = this.form.controls.firstDate;
-  secondDateFormGroup: FormGroup<DateFormGroup> = this.form.controls.secondDate;
-
-  firstDayControl: FormControl<string | null> =
-    this.form.controls.firstDate.controls.day;
-  firstMonthControl: FormControl<string | null> =
-    this.form.controls.firstDate.controls.month;
-  firstYearControl: FormControl<string | null> =
-    this.form.controls.firstDate.controls.year;
-
-  secondDayControl: FormControl<string | null> =
-    this.form.controls.secondDate.controls.day;
-  secondMonthControl: FormControl<string | null> =
-    this.form.controls.secondDate.controls.month;
-  secondYearControl: FormControl<string | null> =
-    this.form.controls.secondDate.controls.year;
-
-  currentDateControl: FormControl<Date> = this.form.controls.currentDate;
-
-  firstDate: Date = new Date(
-    Number(
-      this.firstYearControl.value ||
-        this.currentDateControl.value?.getFullYear()
-    ),
-    Number(
-      this.firstMonthControl.value || this.currentDateControl.value?.getMonth()
-    ),
-    Number(
-      this.firstDayControl.value || this.currentDateControl.value?.getDate()
-    )
-  );
-  secondDate: Date = new Date(
-    Number(
-      this.secondYearControl.value ||
-        this.currentDateControl.value?.getFullYear()
-    ),
-    Number(
-      this.secondMonthControl.value || this.currentDateControl.value?.getMonth()
-    ),
-    Number(
-      this.secondDayControl.value || this.currentDateControl.value?.getDate()
-    )
-  );
-
-  private unsubscribe$: Subject<void> = new Subject<void>();
-
-  constructor(private fb: FormBuilder) {}
-
-  ngOnInit() {
-    this.firstDateInputsValueChange();
-    this.secondDateInputsValueChange();
-  }
-
-  firstDateInputsValueChange() {
-    combineLatest([
-      this.firstDayControl.valueChanges,
-      this.firstMonthControl.valueChanges,
-      this.firstYearControl.valueChanges,
-    ])
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(([firstDayValue, firstMonthValue, firstYearValue]) => {
-        console.log(firstDayValue, firstMonthValue, firstYearValue);
+  getMonthViewForUI(
+    date: Date
+  ): { value: number; class: 'next' | 'current' | 'prev' }[] {
+    let monthView: { value: number; class: 'next' | 'current' | 'prev' }[] = [];
+    let maxDateInMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    let minDateInMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+    let maxDateInPrevMonth = new Date(date.getFullYear(), date.getMonth(), 0);
+    let minDateWeekDay =
+      new Date(minDateInMonth).getDay() === 0
+        ? 7
+        : new Date(minDateInMonth).getDay();
+    let maxDateWeekDay =
+      new Date(maxDateInMonth).getDay() === 0
+        ? 7
+        : new Date(maxDateInMonth).getDay();
+    for (let i = minDateWeekDay; i > 1; i--) {
+      monthView.push({
+        value: maxDateInPrevMonth.getDate() - i + 2,
+        class: 'prev',
       });
-  }
-
-  secondDateInputsValueChange() {
-    combineLatest([
-      this.secondDayControl.valueChanges,
-      this.secondMonthControl.valueChanges,
-      this.secondYearControl.valueChanges,
-    ])
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(([secondDayValue, secondMonthValue, secondYearValue]) => {
-        console.log(secondDayValue, secondMonthValue, secondYearValue);
-      });
-  }
-
-  monthWeeksViewForUi(date: Date): { [key: string]: (number | null)[] } {
-    let firstOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
-    let lastOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-    let datesInWeeks: { [key: string]: (number | null)[] } = {};
-    let weekIterator: number = 1;
-
-    for (let i = 1; i <= lastOfMonth.getDate(); i++) {
-      if (datesInWeeks[weekIterator]) {
-        datesInWeeks[weekIterator].push(i);
-      } else {
-        datesInWeeks[weekIterator] = [i];
-      }
-      if (firstOfMonth.getDay() % 7 === 0) {
-        if (i < 8) {
-          let diff = 6 - datesInWeeks[weekIterator].length;
-          let lastOfPreviousMonthDate = new Date(
-            date.getFullYear(),
-            date.getMonth() - 1,
-            0
-          ).getDate();
-          while (diff >= 0) {
-            // datesInWeeks[weekIterator].unshift(lastOfPreviousMonthDate);
-            datesInWeeks[weekIterator].unshift(null);
-            --lastOfPreviousMonthDate;
-            --diff;
-          }
-        }
-        weekIterator++;
-      }
-      firstOfMonth.setDate(firstOfMonth.getDate() + 1);
     }
-
-    return datesInWeeks;
+    for (let i = 1; i <= maxDateInMonth.getDate(); i++) {
+      monthView.push({ value: i, class: 'current' });
+    }
+    for (let i = 1; i <= 7 - maxDateWeekDay; i++) {
+      monthView.push({ value: i, class: 'next' });
+    }
+    return monthView;
   }
 
-  compareTwoDateWithYearMonthDate(
-    date1: Date,
-    date2: Date,
-    getDate1?: number | null,
-    getDate2?: number | null
-  ): boolean {
-    return (
-      date1.getFullYear() === date2.getFullYear() &&
-      date1.getMonth() === date2.getMonth() &&
-      (getDate1 !== undefined ? getDate1 : date1.getDate()) ===
-        (getDate2 !== undefined ? getDate2 : date2.getDate())
-    );
+  arrowClick(action: 'prev' | 'next') {
+    if (this.view === 'calendar') {
+      if (action === 'prev') {
+        this.viewDate = this.changeHeaderDate(false, this.prevMonth);
+      } else if (action === 'next') {
+        this.viewDate = this.changeHeaderDate(false, this.nextMonth);
+      }
+    } else if (this.view === 'year') {
+      if (action === 'prev') {
+        this.viewDate = this.changeHeaderDate(false, this.prev20Year);
+      } else if (action === 'next') {
+        this.viewDate = this.changeHeaderDate(false, this.next20Year);
+      }
+    } else if (this.view === 'month') {
+      if (action === 'prev') {
+        this.viewDate = this.changeHeaderDate(false, this.prevYear);
+      } else if (action === 'next') {
+        this.viewDate = this.changeHeaderDate(false, this.nextYear);
+      }
+    }
   }
 
-  ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
+  changeHeaderDate(remember: boolean, fn?: (date: Date) => Date): Date {
+    if (remember) {
+      this.lastSelectedHeaderDate = new Date(this.viewDate);
+    }
+    if (fn) {
+      return fn(this.viewDate);
+    }
+    return this.viewDate;
   }
 
-  getPrefix(
-    tempValue: number | string,
-    type: 'hour' | 'minutes' | 'seconds'
-  ): string | number {
-    let value = Number(tempValue);
-    if (value || value === 0) {
-      if (type === 'hour' || type === 'minutes' || type === 'seconds') {
-        return value >= 0 && value < 10 ? `0${value}` : value;
-      } else return value;
-    } else return tempValue;
+  nextMonth(date: Date): Date {
+    return new Date(date.setMonth(date.getMonth() + 1));
   }
 
-  showCalendarPopup() {
-    this.displayCalendarPopup = true;
+  prevMonth(date: Date): Date {
+    return new Date(date.setMonth(date.getMonth() - 1));
   }
 
-  hideCalendarPopup() {
-    this.displayCalendarPopup = false;
-    console.log(this.firstDate);
-    console.log(this.secondDate);
+  next20Year(date: Date): Date {
+    return new Date(date.setFullYear(date.getFullYear() + 20));
   }
 
-  selectDate(dateToSetValue: Date, value: number | null) {
-    if (value) {
-      dateToSetValue.setDate(value);
+  prev20Year(date: Date): Date {
+    return new Date(date.setFullYear(date.getFullYear() - 20));
+  }
+
+  nextYear(date: Date): Date {
+    return new Date(date.setFullYear(date.getFullYear() + 1));
+  }
+
+  prevYear(date: Date): Date {
+    return new Date(date.setFullYear(date.getFullYear() - 1));
+  }
+
+  changeView(view: 'calendar' | 'month' | 'year') {
+    this.view = view;
+  }
+
+  getYearSelection(date: Date): number[] {
+    let yearSelection: number[] = [];
+    let currentYear = date.getFullYear();
+    for (let i = currentYear - 9; i <= currentYear + 10; i++) {
+      yearSelection.push(i);
+    }
+    return yearSelection;
+  }
+
+  selectYear(year: number) {
+    this.viewDate.setFullYear(year);
+    this.viewDate = new Date(this.viewDate);
+    this.changeView('month');
+  }
+
+  handleHeaderDateChange() {
+    if (this.view === 'year') {
+      this.viewDate = new Date(this.lastSelectedHeaderDate);
+      this.changeView('calendar');
+    } else if (this.view === 'calendar') {
+      this.changeHeaderDate(true);
+      this.changeView('year');
+    } else if (this.view === 'month') {
+      this.changeView('year');
+    }
+  }
+
+  selectMonth(monthValue: number) {
+    this.viewDate.setMonth(monthValue);
+    this.viewDate = new Date(this.viewDate);
+    this.changeView('calendar');
+  }
+
+  selectDate(monthDate: number, month: 'current' | 'prev' | 'next') {
+    if (month === 'current') {
+      this.selectedDate = new Date(
+        this.viewDate.getFullYear(),
+        this.viewDate.getMonth(),
+        monthDate
+      );
+    } else if (month === 'prev') {
+      this.selectedDate = new Date(
+        this.viewDate.getFullYear(),
+        this.viewDate.getMonth() - 1,
+        monthDate
+      );
+      this.viewDate = this.changeHeaderDate(true, this.prevMonth);
+    } else if (month === 'next') {
+      this.selectedDate = new Date(
+        this.viewDate.getFullYear(),
+        this.viewDate.getMonth() + 1,
+        monthDate
+      );
+      this.viewDate = this.changeHeaderDate(true, this.nextMonth);
     }
   }
 }
