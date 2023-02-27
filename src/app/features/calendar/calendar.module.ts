@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CalendarRoutingModule } from './calendar-routing.module';
-import { CalendarComponent } from './component/calendar.component';
+import { CalendarComponent } from './single-selection-calendar/calendar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -17,6 +17,7 @@ import * as moment from 'moment';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { CalendarsWrapperComponent } from './calendars-wrapper.component';
+import { RangeSelectionCalendarComponent } from './range-selection-calendar/range-selection-calendar.component';
 
 const KA_MAT_DATE_LOCALE = {
   parse: { dateInput: 'DD/MM/YYYY' },
@@ -30,7 +31,11 @@ const KA_MAT_DATE_LOCALE = {
 moment.locale('ka');
 
 @NgModule({
-  declarations: [CalendarComponent, CalendarsWrapperComponent],
+  declarations: [
+    CalendarComponent,
+    CalendarsWrapperComponent,
+    RangeSelectionCalendarComponent,
+  ],
   imports: [
     CommonModule,
     CalendarRoutingModule,

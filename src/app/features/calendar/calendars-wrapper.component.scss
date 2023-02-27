@@ -4,4 +4,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+}
+
+ul {
+  margin-bottom: 50px;
+  li {
+    display: inline;
+    font-weight: 700;
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+}
+
+.active-router-link {
+  color: var(--color-tbc);
+  outline: none;
 }

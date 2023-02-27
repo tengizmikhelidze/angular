@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   faChevronLeft,
   faChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
 import { Months } from '../constants';
+import { ChangeDateClass } from '../interfaces/change-date-class.model';
 
 @Component({
   selector: 'app-calendar',
@@ -14,6 +15,12 @@ export class CalendarComponent {
   readonly leftArrow = faChevronLeft;
   readonly rightArrow = faChevronRight;
   @Input() selectedDate: Date | null = null;
+  @Input() wrapperStyles: {} = {};
+  @Input() minDate: Date | null = null;
+  @Input() maxDate: Date | null = null;
+  @Input() changeDateClass: ChangeDateClass = null;
+  @Output() changeValue: EventEmitter<Date | null> =
+    new EventEmitter<Date | null>();
   currentDate: Date = new Date();
   viewDate: Date = this.selectedDate
     ? new Date(this.selectedDate)
@@ -146,26 +153,53 @@ export class CalendarComponent {
   }
 
   selectDate(monthDate: number, month: 'current' | 'prev' | 'next') {
-    if (month === 'current') {
-      this.selectedDate = new Date(
-        this.viewDate.getFullYear(),
-        this.viewDate.getMonth(),
-        monthDate
-      );
-    } else if (month === 'prev') {
-      this.selectedDate = new Date(
-        this.viewDate.getFullYear(),
-        this.viewDate.getMonth() - 1,
-        monthDate
-      );
-      this.viewDate = this.changeHeaderDate(true, this.prevMonth);
-    } else if (month === 'next') {
-      this.selectedDate = new Date(
-        this.viewDate.getFullYear(),
-        this.viewDate.getMonth() + 1,
-        monthDate
-      );
-      this.viewDate = this.changeHeaderDate(true, this.nextMonth);
+    let date = this.getDateFromMonthDate(monthDate, month);
+    if (this.isBetweenMinAndMaxDate(monthDate, month)) {
+      if (month === 'current') {
+        this.selectedDate = new Date(date);
+      } else if (month === 'prev') {
+        this.selectedDate = new Date(date);
+        this.viewDate = this.changeHeaderDate(true, this.prevMonth);
+      } else if (month === 'next') {
+        this.selectedDate = new Date(date);
+        this.viewDate = this.changeHeaderDate(true, this.nextMonth);
+      }
+      this.changeValue.emit(this.selectedDate);
     }
+  }
+
+  isBetweenMinAndMaxDate(
+    monthDate: number,
+    month: 'current' | 'prev' | 'next'
+  ): boolean {
+    let date = this.getDateFromMonthDate(monthDate, month);
+    if (this.minDate && this.maxDate) {
+      return (
+        date.getTime() >= this.minDate.getTime() &&
+        date.getTime() <= this.maxDate.getTime()
+      );
+    } else if (this.minDate) {
+      return date.getTime() >= this.minDate.getTime();
+    } else if (this.maxDate) {
+      return date.getTime() <= this.maxDate.getTime();
+    }
+    return true;
+  }
+
+  getDateFromMonthDate(
+    monthDate: number,
+    month: 'current' | 'prev' | 'next'
+  ): Date {
+    return new Date(
+      this.viewDate.getFullYear(),
+      month === 'current'
+        ? this.viewDate.getMonth()
+        : month === 'prev'
+        ? this.viewDate.getMonth() - 1
+        : month === 'next'
+        ? this.viewDate.getMonth() + 1
+        : this.viewDate.getMonth(),
+      monthDate
+    );
   }
 }

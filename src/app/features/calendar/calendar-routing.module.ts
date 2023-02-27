@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CalendarComponent } from './component/calendar.component';
+import { CalendarComponent } from './single-selection-calendar/calendar.component';
 import { CalendarsWrapperComponent } from './calendars-wrapper.component';
+import { RangeSelectionCalendarComponent } from './range-selection-calendar/range-selection-calendar.component';
 
 const routes: Routes = [
   {
@@ -11,7 +12,15 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
+        redirectTo: 'single-selection',
+      },
+      {
+        path: 'single-selection',
         component: CalendarComponent,
+      },
+      {
+        path: 'range-selection',
+        component: RangeSelectionCalendarComponent,
       },
     ],
   },

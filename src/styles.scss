@@ -34,8 +34,8 @@ $shared-components-theme: mat.define-light-theme(
   )
 );
 
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
+// Include theme styles for core and each single-selection-calendar used in your app.
+// Alternatively, you can import and @include the theme mixins for each single-selection-calendar
 // that you are using.
 @include mat.all-component-themes($shared-components-theme);
 

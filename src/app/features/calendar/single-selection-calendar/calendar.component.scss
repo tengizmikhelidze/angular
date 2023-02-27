@@ -114,10 +114,12 @@
         background-color: var(--color-tbc);
         color: #ffffff;
       }
-
+      &.not-between {
+        color: rgba(0, 0, 0, 0.2);
+      }
       &.next,
       &.prev {
-        color: rgba(0, 0, 0, 0.4);
+        color: rgba(0, 0, 0, 0.2);
       }
     }
   }

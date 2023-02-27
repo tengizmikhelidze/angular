@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper" [ngStyle]="wrapperStyles">
   <div class="content">
     <div class="header">
       <div class="header-date" (click)="handleHeaderDateChange()">
@@ -51,14 +51,27 @@
         <div class="calendar-month">
           <ng-container *ngFor="let monthDate of getMonthViewForUI(viewDate)">
             <div
-              class="month-date {{ monthDate.class }}"
+              class="month-date {{ monthDate.class }} {{
+                changeDateClass
+                  ? changeDateClass(
+                      this.getDateFromMonthDate(
+                        monthDate.value,
+                        monthDate.class
+                      )
+                    )
+                  : ''
+              }}"
               (click)="selectDate(monthDate.value, monthDate.class)"
               [ngClass]="{
                 selected:
                   viewDate.getFullYear() === selectedDate?.getFullYear() &&
                   viewDate.getMonth() === selectedDate?.getMonth() &&
                   monthDate.value === selectedDate?.getDate() &&
-                  monthDate.class === 'current'
+                  monthDate.class === 'current',
+                'not-between': !isBetweenMinAndMaxDate(
+                  monthDate.value,
+                  monthDate.class
+                )
               }"
             >
               <p>{{ monthDate.value }}</p>

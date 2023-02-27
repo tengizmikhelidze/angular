@@ -1,0 +1,16 @@
+<div class="calendar-popup">
+  <app-calendar
+    [wrapperStyles]="{ 'box-shadow': 'none' }"
+    [maxDate]="endDate"
+    [changeDateClass]="changeDateClass"
+    (changeValue)="startDateChange($event)"
+  >
+  </app-calendar>
+  <app-calendar
+    [wrapperStyles]="{ 'box-shadow': 'none' }"
+    [minDate]="startDate"
+    [changeDateClass]="changeDateClass"
+    (changeValue)="endDateChange($event)"
+  >
+  </app-calendar>
+</div>
