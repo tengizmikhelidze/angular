@@ -1,7 +1,7 @@
 <div class="wrapper" [ngStyle]="wrapperStyles">
   <div class="content">
     <div class="header">
-      <div class="header-date" (click)="handleHeaderDateChange()">
+      <div class="header-date" (click)="handleViewDateChange()">
         <ng-container [ngSwitch]="view">
           <ng-container *ngSwitchCase="'calendar'">
             <button>
@@ -99,6 +99,58 @@
           </div>
         </div>
       </ng-container>
+    </div>
+    <div class="clock" *ngIf="hasClock">
+      <div class="clock-info hours">
+        <fa-icon
+          [icon]="upArrow"
+          (click)="clockArrowClick('hours', 'up')"
+        ></fa-icon>
+        <input
+          type="number"
+          [(ngModel)]="hours"
+          (ngModelChange)="clockChange()"
+          (keypress)="preventCharacters($event)"
+        />
+        <fa-icon
+          [icon]="downArrow"
+          (click)="clockArrowClick('hours', 'down')"
+        ></fa-icon>
+      </div>
+      :
+      <div class="clock-info minutes">
+        <fa-icon
+          [icon]="upArrow"
+          (click)="clockArrowClick('minutes', 'up')"
+        ></fa-icon>
+        <input
+          type="number"
+          [(ngModel)]="minutes"
+          (ngModelChange)="clockChange()"
+          (keypress)="preventCharacters($event)"
+        />
+        <fa-icon
+          [icon]="downArrow"
+          (click)="clockArrowClick('minutes', 'down')"
+        ></fa-icon>
+      </div>
+      :
+      <div class="clock-info seconds">
+        <fa-icon
+          [icon]="upArrow"
+          (click)="clockArrowClick('seconds', 'up')"
+        ></fa-icon>
+        <input
+          type="number"
+          [(ngModel)]="seconds"
+          (ngModelChange)="clockChange()"
+          (keypress)="preventCharacters($event)"
+        />
+        <fa-icon
+          [icon]="downArrow"
+          (click)="clockArrowClick('seconds', 'down')"
+        ></fa-icon>
+      </div>
     </div>
   </div>
 </div>

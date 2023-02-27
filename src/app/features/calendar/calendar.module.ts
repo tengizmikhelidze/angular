@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { CalendarRoutingModule } from './calendar-routing.module';
 import { CalendarComponent } from './single-selection-calendar/calendar.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -45,6 +45,7 @@ moment.locale('ka');
     MatInputModule,
     MatDatepickerModule,
     MatCardModule,
+    FormsModule,
   ],
   providers: [
     NativeDateAdapter,

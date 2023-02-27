@@ -4,7 +4,8 @@
 }
 .wrapper {
   width: 300px;
-  height: 340px;
+  min-height: 340px;
+  max-height: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -171,6 +172,42 @@
   }
 }
 
+.clock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  .clock-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    input {
+      width: 25px;
+      height: 25px;
+      text-align: center;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+    }
+    fa-icon {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      border-radius: 50%;
+      color: rgba(0, 0, 0, 0.5);
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+}
+
 @keyframes show {
   0% {
     transform: translateY(-20px);
@@ -178,4 +215,16 @@
   100% {
     transform: translateY(0px);
   }
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }

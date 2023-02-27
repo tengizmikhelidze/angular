@@ -3,6 +3,7 @@
     [wrapperStyles]="{ 'box-shadow': 'none' }"
     [maxDate]="endDate"
     [changeDateClass]="changeDateClass"
+    [hasClock]="true"
     (changeValue)="startDateChange($event)"
   >
   </app-calendar>
@@ -10,7 +11,11 @@
     [wrapperStyles]="{ 'box-shadow': 'none' }"
     [minDate]="startDate"
     [changeDateClass]="changeDateClass"
+    [hasClock]="true"
     (changeValue)="endDateChange($event)"
   >
   </app-calendar>
 </div>
+
+<div>start date: {{ startDate }}</div>
+<div>end date: {{ endDate }}</div>

@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
+  faChevronDown,
   faChevronLeft,
   faChevronRight,
+  faChevronUp,
 } from '@fortawesome/free-solid-svg-icons';
 import { Months } from '../constants';
 import { ChangeDateClass } from '../interfaces/change-date-class.model';
@@ -14,10 +16,13 @@ import { ChangeDateClass } from '../interfaces/change-date-class.model';
 export class CalendarComponent {
   readonly leftArrow = faChevronLeft;
   readonly rightArrow = faChevronRight;
+  readonly upArrow = faChevronUp;
+  readonly downArrow = faChevronDown;
   @Input() selectedDate: Date | null = null;
   @Input() wrapperStyles: {} = {};
   @Input() minDate: Date | null = null;
   @Input() maxDate: Date | null = null;
+  @Input() hasClock: boolean = false;
   @Input() changeDateClass: ChangeDateClass = null;
   @Output() changeValue: EventEmitter<Date | null> =
     new EventEmitter<Date | null>();
@@ -26,6 +31,9 @@ export class CalendarComponent {
     ? new Date(this.selectedDate)
     : new Date(this.currentDate);
   lastSelectedHeaderDate: Date = new Date(this.viewDate);
+  hours: number = this.viewDate.getHours();
+  minutes: number = this.viewDate.getMinutes();
+  seconds: number = this.viewDate.getSeconds();
   view: 'calendar' | 'month' | 'year' = 'calendar';
   Months = Months;
 
@@ -62,26 +70,26 @@ export class CalendarComponent {
   arrowClick(action: 'prev' | 'next') {
     if (this.view === 'calendar') {
       if (action === 'prev') {
-        this.viewDate = this.changeHeaderDate(false, this.prevMonth);
+        this.viewDate = this.changeViewDate(false, this.prevMonth);
       } else if (action === 'next') {
-        this.viewDate = this.changeHeaderDate(false, this.nextMonth);
+        this.viewDate = this.changeViewDate(false, this.nextMonth);
       }
     } else if (this.view === 'year') {
       if (action === 'prev') {
-        this.viewDate = this.changeHeaderDate(false, this.prev20Year);
+        this.viewDate = this.changeViewDate(false, this.prev20Year);
       } else if (action === 'next') {
-        this.viewDate = this.changeHeaderDate(false, this.next20Year);
+        this.viewDate = this.changeViewDate(false, this.next20Year);
       }
     } else if (this.view === 'month') {
       if (action === 'prev') {
-        this.viewDate = this.changeHeaderDate(false, this.prevYear);
+        this.viewDate = this.changeViewDate(false, this.prevYear);
       } else if (action === 'next') {
-        this.viewDate = this.changeHeaderDate(false, this.nextYear);
+        this.viewDate = this.changeViewDate(false, this.nextYear);
       }
     }
   }
 
-  changeHeaderDate(remember: boolean, fn?: (date: Date) => Date): Date {
+  changeViewDate(remember: boolean, fn?: ((date: Date) => Date) | null): Date {
     if (remember) {
       this.lastSelectedHeaderDate = new Date(this.viewDate);
     }
@@ -134,12 +142,12 @@ export class CalendarComponent {
     this.changeView('month');
   }
 
-  handleHeaderDateChange() {
+  handleViewDateChange() {
     if (this.view === 'year') {
       this.viewDate = new Date(this.lastSelectedHeaderDate);
       this.changeView('calendar');
     } else if (this.view === 'calendar') {
-      this.changeHeaderDate(true);
+      this.changeViewDate(true);
       this.changeView('year');
     } else if (this.view === 'month') {
       this.changeView('year');
@@ -155,15 +163,18 @@ export class CalendarComponent {
   selectDate(monthDate: number, month: 'current' | 'prev' | 'next') {
     let date = this.getDateFromMonthDate(monthDate, month);
     if (this.isBetweenMinAndMaxDate(monthDate, month)) {
-      if (month === 'current') {
-        this.selectedDate = new Date(date);
-      } else if (month === 'prev') {
-        this.selectedDate = new Date(date);
-        this.viewDate = this.changeHeaderDate(true, this.prevMonth);
-      } else if (month === 'next') {
-        this.selectedDate = new Date(date);
-        this.viewDate = this.changeHeaderDate(true, this.nextMonth);
-      }
+      this.changeViewDate(
+        true,
+        month === 'prev'
+          ? this.prevMonth
+          : month === 'next'
+          ? this.nextMonth
+          : null
+      );
+      this.selectedDate = new Date(date);
+      this.selectedDate?.setHours(this.hours, this.minutes, this.seconds);
+      this.selectedDate = new Date(this.selectedDate);
+      this.viewDate = new Date(this.selectedDate);
       this.changeValue.emit(this.selectedDate);
     }
   }
@@ -201,5 +212,46 @@ export class CalendarComponent {
         : this.viewDate.getMonth(),
       monthDate
     );
+  }
+
+  clockChange() {
+    if (this.hours > 23) {
+      this.hours = 0;
+    } else if (this.hours < 0) {
+      this.hours = 0;
+    }
+    if (this.minutes > 59) {
+      this.minutes = 0;
+    } else if (this.minutes < 0) {
+      this.minutes = 0;
+      return;
+    }
+    this.viewDate.setHours(this.hours, this.minutes, this.seconds);
+    this.viewDate = new Date(this.viewDate);
+    this.changeViewDate(true);
+    if (this.selectedDate) {
+      this.selectedDate = new Date(this.viewDate);
+      this.selectedDate.setHours(this.hours);
+      this.selectedDate = new Date(this.selectedDate);
+      this.changeValue.emit(this.selectedDate);
+    }
+  }
+
+  preventCharacters($event: KeyboardEvent) {
+    return !!$event.key.match(/\d/);
+  }
+
+  clockArrowClick(
+    type: 'hours' | 'minutes' | 'seconds',
+    increment: 'up' | 'down'
+  ) {
+    if (type === 'hours') {
+      this.hours += increment === 'up' ? 1 : increment === 'down' ? -1 : 0;
+    } else if (type === 'minutes') {
+      this.minutes += increment === 'up' ? 1 : increment === 'down' ? -1 : 0;
+    } else if (type === 'seconds') {
+      this.seconds += increment === 'up' ? 1 : increment === 'down' ? -1 : 0;
+    }
+    this.clockChange();
   }
 }
