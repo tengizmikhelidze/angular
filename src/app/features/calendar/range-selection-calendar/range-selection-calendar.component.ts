@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener } from '@angular/core';
 import { ChangeDateClass } from '../interfaces/change-date-class.model';
 
 @Component({
@@ -9,6 +9,19 @@ import { ChangeDateClass } from '../interfaces/change-date-class.model';
 export class RangeSelectionCalendarComponent {
   startDate: Date | null = null;
   endDate: Date | null = null;
+  showPopup: boolean = false;
+
+  constructor(private elementRef: ElementRef) {
+    this.showPopup = true;
+  }
+
+  @HostListener('document:click', ['$event.target'])
+  public onClick(target: any) {
+    const clickedInside = this.elementRef.nativeElement.contains(target);
+    if (!clickedInside) {
+      // this.clickOutside();
+    }
+  }
 
   startDateChange(startDate: Date | null) {
     this.startDate = startDate;
@@ -27,4 +40,8 @@ export class RangeSelectionCalendarComponent {
     }
     return '';
   };
+
+  clickOutside() {
+    this.showPopup = false;
+  }
 }

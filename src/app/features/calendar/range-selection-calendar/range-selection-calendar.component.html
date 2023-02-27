@@ -1,18 +1,21 @@
-<div class="calendar-popup">
-  <app-calendar
-    [wrapperStyles]="{ 'box-shadow': 'none' }"
-    [maxDate]="endDate"
-    [changeDateClass]="changeDateClass"
-    [hasClock]="true"
-    (changeValue)="startDateChange($event)"
-  >
-  </app-calendar>
-  <app-calendar
-    [wrapperStyles]="{ 'box-shadow': 'none' }"
-    [minDate]="startDate"
-    [changeDateClass]="changeDateClass"
-    [hasClock]="true"
-    (changeValue)="endDateChange($event)"
-  >
-  </app-calendar>
+<div class="range-wrapper">
+  <input type="text" (click)="showPopup = true" />
+  <div class="calendar-popup" [style.display]="showPopup ? 'grid' : 'none'">
+    <app-calendar
+      [wrapperStyles]="{ 'box-shadow': 'none' }"
+      [maxDate]="endDate"
+      [changeDateClass]="changeDateClass"
+      [hasClock]="true"
+      (changeValue)="startDateChange($event)"
+    >
+    </app-calendar>
+    <app-calendar
+      [wrapperStyles]="{ 'box-shadow': 'none' }"
+      [minDate]="startDate"
+      [changeDateClass]="changeDateClass"
+      [hasClock]="true"
+      (changeValue)="endDateChange($event)"
+    >
+    </app-calendar>
+  </div>
 </div>
