@@ -177,6 +177,7 @@
   justify-content: center;
   align-items: center;
   gap: 20px;
+  animation: show 0.5s ease-in-out;
 
   .clock-info {
     display: flex;
