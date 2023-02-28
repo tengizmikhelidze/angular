@@ -61,7 +61,12 @@
                     )
                   : ''
               }}"
-              (click)="selectDate(monthDate.value, monthDate.class)"
+              (click)="
+                log();
+                isBetweenMinAndMaxDate(monthDate.value, monthDate.class)
+                  ? selectDate(monthDate.value, monthDate.class)
+                  : null
+              "
               [ngClass]="{
                 selected:
                   viewDate.getFullYear() === selectedDate?.getFullYear() &&

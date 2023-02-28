@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CalendarsWrapperComponent } from './calendars-wrapper.component';
 import { RangeSelectionCalendarComponent } from './range-selection-calendar/range-selection-calendar.component';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,9 @@ import { RangeSelectionCalendarComponent } from './range-selection-calendar/rang
     ReactiveFormsModule,
     FontAwesomeModule,
     FormsModule,
+    NgxMaskDirective,
+    NgxMaskPipe,
   ],
+  providers: [provideNgxMask()],
 })
 export class CalendarModule {}

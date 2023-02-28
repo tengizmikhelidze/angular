@@ -1,6 +1,6 @@
 {
   "name": "shared-components",
-  "version": "1.7.0",
+  "version": "2.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port=2121 -o",
@@ -35,6 +35,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.2.0",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "moment": "^2.29.4",
+    "ngx-mask": "^15.0.3",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"

@@ -162,21 +162,19 @@ export class CalendarComponent {
 
   selectDate(monthDate: number, month: 'current' | 'prev' | 'next') {
     let date = this.getDateFromMonthDate(monthDate, month);
-    if (this.isBetweenMinAndMaxDate(monthDate, month)) {
-      this.changeViewDate(
-        true,
-        month === 'prev'
-          ? this.prevMonth
-          : month === 'next'
-          ? this.nextMonth
-          : null
-      );
-      this.selectedDate = new Date(date);
-      this.selectedDate?.setHours(this.hours, this.minutes, this.seconds);
-      this.selectedDate = new Date(this.selectedDate);
-      this.viewDate = new Date(this.selectedDate);
-      this.changeValue.emit(this.selectedDate);
-    }
+    this.changeViewDate(
+      true,
+      month === 'prev'
+        ? this.prevMonth
+        : month === 'next'
+        ? this.nextMonth
+        : null
+    );
+    this.selectedDate = new Date(date);
+    this.selectedDate?.setHours(this.hours, this.minutes, this.seconds);
+    this.selectedDate = new Date(this.selectedDate);
+    this.viewDate = new Date(this.selectedDate);
+    this.changeValue.emit(this.selectedDate);
   }
 
   isBetweenMinAndMaxDate(
@@ -253,5 +251,9 @@ export class CalendarComponent {
       this.seconds += increment === 'up' ? 1 : increment === 'down' ? -1 : 0;
     }
     this.clockChange();
+  }
+
+  log() {
+    console.log('any');
   }
 }
