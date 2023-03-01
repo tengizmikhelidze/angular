@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { ChangeDateClass } from '../interfaces/change-date-class.model';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { CalendarComponent } from '../single-selection-calendar/calendar.component';
@@ -14,6 +14,27 @@ export class RangeSelectionCalendarComponent {
   endDate: Date | null = null;
   showPopup: boolean = false;
   inputValue: string = '';
+
+  @ViewChild('startDateCalendarComponent')
+  startDateCalendarComponent: CalendarComponent | null = null;
+  @ViewChild('endDateCalendarComponent')
+  endDateCalendarComponent: CalendarComponent | null = null;
+
+  constructor(private elementRef: ElementRef) {}
+
+  @HostListener('document:click', ['$event.target'])
+  public onClick(target: any) {
+    const clickedInside = this.elementRef.nativeElement.contains(target);
+
+    if (!clickedInside) {
+      if (
+        !target.classList.contains('month-date') &&
+        !target.classList.contains('month-date-value')
+      ) {
+        this.hidePopup();
+      }
+    }
+  }
 
   startDateChange(startDate: Date | null) {
     this.startDate = startDate;
@@ -84,10 +105,6 @@ export class RangeSelectionCalendarComponent {
     return '';
   };
 
-  clickOutside() {
-    this.showPopup = false;
-  }
-
   changeInput() {
     let startDateString = '';
     let endDateString = '';
@@ -118,5 +135,13 @@ export class RangeSelectionCalendarComponent {
     if (endDateString) {
       this.endDate = new Date(endDateString);
     }
+  }
+
+  hidePopup() {
+    this.showPopup = false;
+  }
+
+  displayPopup() {
+    this.showPopup = true;
   }
 }

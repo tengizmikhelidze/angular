@@ -61,8 +61,7 @@
                     )
                   : ''
               }}"
-              (click)="
-                log();
+              (mousedown)="
                 isBetweenMinAndMaxDate(monthDate.value, monthDate.class)
                   ? selectDate(monthDate.value, monthDate.class)
                   : null
@@ -79,7 +78,7 @@
                 )
               }"
             >
-              <p>{{ monthDate.value }}</p>
+              <p class="month-date-value">{{ monthDate.value }}</p>
             </div>
           </ng-container>
         </div>

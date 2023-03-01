@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import {
   faChevronDown,
   faChevronLeft,
@@ -26,6 +33,8 @@ export class CalendarComponent {
   @Input() changeDateClass: ChangeDateClass = null;
   @Output() changeValue: EventEmitter<Date | null> =
     new EventEmitter<Date | null>();
+  @ViewChild('monthDateDiv') monthDateDiv: ElementRef<HTMLDivElement> | null =
+    null;
   currentDate: Date = new Date();
   viewDate: Date = this.selectedDate
     ? new Date(this.selectedDate)
@@ -251,9 +260,5 @@ export class CalendarComponent {
       this.seconds += increment === 'up' ? 1 : increment === 'down' ? -1 : 0;
     }
     this.clockChange();
-  }
-
-  log() {
-    console.log('any');
   }
 }

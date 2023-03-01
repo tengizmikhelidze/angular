@@ -1,14 +1,15 @@
 <div class="range-wrapper">
   <input
     type="text"
-    (click)="showPopup = true"
+    (click)="displayPopup()"
     [showMaskTyped]="true"
     [(ngModel)]="inputValue"
     (ngModelChange)="changeInput()"
     mask="00/00/0000 - 00/00/0000"
   />
-  <div class="calendar-popup" *ngIf="showPopup ? 'grid' : 'none'">
+  <div class="calendar-popup" *ngIf="showPopup">
     <app-calendar
+      #startDateCalendarComponent
       [wrapperStyles]="{ 'box-shadow': 'none' }"
       [maxDate]="endDate"
       [changeDateClass]="changeDateClass"
@@ -18,6 +19,7 @@
     >
     </app-calendar>
     <app-calendar
+      #endDateCalendarComponent
       [wrapperStyles]="{ 'box-shadow': 'none' }"
       [minDate]="startDate"
       [changeDateClass]="changeDateClass"
