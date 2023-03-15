@@ -1,0 +1,19 @@
+<main class="wrapper">
+  <div class="content">
+    <canvas id="wifi-canvas"></canvas>
+    <div class="inputs-field">
+      <app-text-input
+        [placeHolder]="'ჩაწერეთ SSID'"
+        [(ngModel)]="ssid"
+      ></app-text-input>
+      <app-text-input
+        [placeHolder]="'ჩაწერეთ password'"
+        [type]="'password'"
+        [(ngModel)]="password"
+      ></app-text-input>
+    </div>
+    <button class="submit-button" (click)="wifiQrGenerator(ssid, password)">
+      Generate
+    </button>
+  </div>
+</main>

@@ -3,7 +3,7 @@
   min-height: 100vh;
   max-height: 100%;
   display: grid;
-  grid-template-rows: 1fr 40px;
+  grid-template-rows: 1fr auto;
   nav {
     position: fixed;
     bottom: 0;

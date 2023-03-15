@@ -24,6 +24,6 @@ const ExportedComponents = [CheckboxComponent];
 @NgModule({
   declarations: [...Components, RadioComponent, TextComponent],
   imports: [...InternalModules, ...ExternalModules],
-  exports: [...ExportedComponents],
+  exports: [...ExportedComponents, TextComponent],
 })
 export class InputsModule {}

@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { NavigationBar } from './interfaces/navigation-bar.interface';
-import { faCalendarDays, faItalic } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCalendarDays,
+  faItalic,
+  faQrcode,
+} from '@fortawesome/free-solid-svg-icons';
 import { NgForOf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -26,6 +30,11 @@ export class NavigationBarComponent {
       icon: faItalic,
       label: 'Inputs',
       routerLink: '/inputs',
+    },
+    {
+      icon: faQrcode,
+      label: 'QR Generator',
+      routerLink: '/QR',
     },
   ];
 }

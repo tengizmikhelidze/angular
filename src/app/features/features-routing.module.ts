@@ -20,6 +20,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('./inputs/inputs.module').then((m) => m.InputsModule),
       },
+      {
+        path: 'QR',
+        loadChildren: () =>
+          import('./qr-code-generator/qr-code-generator.module').then(
+            (m) => m.QrCodeGeneratorModule
+          ),
+      },
     ],
   },
 ];

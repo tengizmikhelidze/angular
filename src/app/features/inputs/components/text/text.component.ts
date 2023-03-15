@@ -24,6 +24,7 @@ export class TextComponent
   implements ControlValueAccessor, AfterContentChecked
 {
   @Input() id: string = '';
+  @Input() type: 'text' | 'password' = 'text';
   @Input() placeHolder: string = '';
   @Input() placeHolderStyles: {} = {};
   @Input() inputStyles: {} = {};
@@ -44,7 +45,7 @@ export class TextComponent
   ngAfterContentChecked() {
     if (!this.defaultValueAlreadyChecked && this.textInput && this.val) {
       this.textInput['nativeElement']['value'] = this.val;
-      this.defaultValueAlreadyChecked = true
+      this.defaultValueAlreadyChecked = true;
     }
   }
 

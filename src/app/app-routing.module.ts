@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PageNotFoundComponent } from '../shared';
+import { PageNotFoundComponent } from './shared';
 
 const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('../features/features.module').then((m) => m.FeaturesModule),
+      import('./features/features.module').then((m) => m.FeaturesModule),
   },
   {
     path: '**',

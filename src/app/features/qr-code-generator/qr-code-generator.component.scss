@@ -1,4 +1,4 @@
-.calendar-whole-wrapper {
+:host {
   display: grid;
   grid-template-columns: auto 1fr;
   width: 100%;
@@ -15,7 +15,6 @@ nav {
   }
 }
 
-.active-router-link {
+.active-link {
   color: var(--color-tbc);
-  outline: none;
 }
